@@ -37,7 +37,7 @@
 		};
 		uart_tx_led: led@4 {
 			gpios = <&gpioh 0 GPIO_INT_ACTIVE_LOW>;
-			label = "UART RX";
+			label = "UART TX";
 		};
 		uart_rx_led: led@5 {
 			gpios = <&gpioh 1 GPIO_INT_ACTIVE_LOW>;
