@@ -1,0 +1,10 @@
+# Kconfig - xildebug rev1 board configuration
+#
+# Copyright (c) 2018 arturo182
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+config BOARD_XILDEBUG_REV1
+	bool "Xildebug Rev1 Board"
+	depends on SOC_STM32L433XC

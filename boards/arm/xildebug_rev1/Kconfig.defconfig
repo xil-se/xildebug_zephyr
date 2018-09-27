@@ -1,0 +1,39 @@
+# Kconfig - xildebug rev1 board configuration
+#
+# Copyright (c) 2018 arturo182
+# Copyright (c) 2016 Open-RnD Sp. z o.o.
+# Copyright (c) 2016 BayLibre, SAS
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+if BOARD_XILDEBUG_REV1
+
+config BOARD
+	default "xildebug_rev1"
+
+if UART_CONSOLE
+
+config UART_STM32_PORT_2
+	default y
+
+endif # UART_CONSOLE
+
+if PWM
+
+config PWM_STM32_2
+	default y
+
+endif # PWM
+
+if SPI
+
+config SPI_1
+	default y
+
+config SPI_STM32_INTERRUPT
+	default y
+
+endif # SPI
+
+endif # BOARD_XILDEBUG_REV1

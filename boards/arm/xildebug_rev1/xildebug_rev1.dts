@@ -1,0 +1,103 @@
+/*
+ * Copyright (c) 2018 arturo182
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+/dts-v1/;
+#include <st/l4/stm32l433Xc.dtsi>
+
+/ {
+	model = "xil.se xildebug rev1 board";
+	compatible = "st,xildebug-rev1", "st,stm32l433";
+
+	chosen {
+		zephyr,console = &usart2;
+		zephyr,sram = &sram0;
+		zephyr,flash = &flash0;
+	};
+
+	leds {
+		compatible = "gpio-leds";
+		rgb_r: led@0 {
+			gpios = <&gpioa 15 GPIO_INT_ACTIVE_LOW>;
+			label = "RGB R";
+		};
+		rgb_g: led@1 {
+			gpios = <&gpioa 29 GPIO_INT_ACTIVE_LOW>;
+			label = "RGB G";
+		};
+		rgb_b: led@2 {
+			gpios = <&gpiob 12 GPIO_INT_ACTIVE_LOW>;
+			label = "RGB B";
+		};
+		swd_led: led@3 {
+			gpios = <&gpioa 4 GPIO_INT_ACTIVE_LOW>;
+			label = "SWD";
+		};
+		uart_tx_led: led@4 {
+			gpios = <&gpioh 0 GPIO_INT_ACTIVE_LOW>;
+			label = "UART RX";
+		};
+		uart_rx_led: led@5 {
+			gpios = <&gpioh 1 GPIO_INT_ACTIVE_LOW>;
+			label = "UART RX";
+		};
+	};
+
+	aliases {
+		led0 = &rgb_r;
+		led1 = &rgb_g;
+		led2 = &rgb_b;
+		led3 = &swd_led;
+		led4 = &uart_tx_led;
+		led5 = &uart_rx_led;
+	};
+};
+
+&usart1 {
+	current-speed = <115200>;
+	pinctrl-0 = <&usart1_pins_b>;
+	pinctrl-names = "default";
+};
+
+&usart2 {
+	current-speed = <115200>;
+	pinctrl-0 = <&usart2_pins_a>;
+	pinctrl-names = "default";
+	status = "ok";
+};
+
+&spi1 {
+	status = "ok";
+};
+
+&timers2 {
+	status = "ok";
+
+	pwm {
+		status = "ok";
+	};
+};
+
+&rtc {
+	status = "ok";
+};
+
+&flash0 {
+	partitions {
+		compatible = "fixed-partitions";
+		#address-cells = <1>;
+		#size-cells = <1>;
+
+#if defined(CONFIG_FS_FLASH_STORAGE_PARTITION)
+		/*
+		 * Reserve the final 16 KiB for the application.
+		 */
+		storage_partition: partition@3c000 {
+			label = "storage";
+			reg = <0x0003c000 0x00004000>;
+		};
+#endif
+	};
+};

@@ -1,0 +1,12 @@
+identifier: xildebug_rev1
+name: xildebug rev1
+type: mcu
+arch: arm
+toolchain:
+  - zephyr
+  - gnuarmemb
+ram: 64
+flash: 256
+supported:
+  - nvs
+  - pwm
